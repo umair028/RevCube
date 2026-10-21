@@ -296,11 +296,15 @@ function footer(cta) {
 
   const list = (label, links) => `<div class="footer-nav"><div class="text-style-kicker">${esc(label)}</div><div class="footer-links-list">${links.map(l => `<a${attrs({ href: url(l.href), 'data-todo': l.todo, class: 'text-size-body-xl is-link' })}>${esc(l.label)}</a>`).join('')}</div></div>`;
 
-  const contactBlock = `<div id="contact" class="footer-nav revcube-contact"><div class="text-style-kicker">${esc(c.label)}</div><div class="footer-links-list"><a aria-label="Email ${esc(site.name)}" href="mailto:${esc(c.email)}" class="text-size-body-xl is-link">${esc(c.email)}</a><a aria-label="Call ${esc(site.name)}" href="${esc(c.phoneHref)}" class="text-size-body-xl is-link">${esc(c.phone)}</a><p class="text-size-body-l text-color-ash revcube-address">${esc(c.officeLabel ? c.officeLabel + ': ' + c.address : c.address)}</p></div></div>`;
+  // Office addresses open Google Maps in a new tab; data-keep-link keeps them working while homeLinksOnly is on.
+  const mapLink = (office, text) => office.mapUrl
+    ? `<a href="${esc(office.mapUrl)}" target="_blank" rel="noopener" data-keep-link="" aria-label="${esc(text)} (opens Google Maps)" class="text-size-body-l text-color-ash revcube-address">${esc(text)}</a>`
+    : `<p class="text-size-body-l text-color-ash revcube-address">${esc(text)}</p>`;
+  const contactBlock = `<div id="contact" class="footer-nav revcube-contact"><div class="text-style-kicker">${esc(c.label)}</div><div class="footer-links-list"><a aria-label="Email ${esc(site.name)}" href="mailto:${esc(c.email)}" class="text-size-body-xl is-link">${esc(c.email)}</a><a aria-label="Call ${esc(site.name)}" href="${esc(c.phoneHref)}" class="text-size-body-xl is-link">${esc(c.phone)}</a>${mapLink(c, c.officeLabel ? c.officeLabel + ': ' + c.address : c.address)}</div></div>`;
   // A blank heading and a blank first line (the email's row) put the second office's phone beside the main phone
   // and its address beside the main address.
   const o = c.secondOffice;
-  const officeBlock = o ? `<div class="footer-nav revcube-contact"><div class="text-style-kicker" aria-hidden="true">&nbsp;</div><div class="footer-links-list"><div class="text-size-body-xl revcube-row-spacer" aria-hidden="true">&nbsp;</div><a aria-label="Call ${esc(site.name)} ${esc(o.label)}" href="${esc(o.phoneHref)}" class="text-size-body-xl is-link">${esc(o.phone)}</a><p class="text-size-body-l text-color-ash revcube-address">${esc(o.label + ': ' + o.address)}</p></div></div>` : '';
+  const officeBlock = o ? `<div class="footer-nav revcube-contact"><div class="text-style-kicker" aria-hidden="true">&nbsp;</div><div class="footer-links-list"><div class="text-size-body-xl revcube-row-spacer" aria-hidden="true">&nbsp;</div><a aria-label="Call ${esc(site.name)} ${esc(o.label)}" href="${esc(o.phoneHref)}" class="text-size-body-xl is-link">${esc(o.phone)}</a>${mapLink(o, o.label + ': ' + o.address)}</div></div>` : '';
   const socialBlock = `<div class="footer-nav"><div class="text-style-kicker">${esc(f.socialLabel)}</div><div class="footer-links-list">${f.social.map(s => `<a${attrs({ href: url(s.href), 'data-todo': s.todo, class: 'text-style-statement for-link' })}>${esc(s.label)}</a>`).join('')}</div></div>`;
   const legal = `<div class="revcube-legal">${f.legal.map(l => `<a${attrs({ href: url(l.href), 'data-todo': l.todo, class: 'text-size-body-l is-link' })}>${esc(l.label)}</a>`).join('')}</div>`;
 
@@ -321,12 +325,13 @@ function footer(cta) {
 
 // With site.homeLinksOnly: every <a> that isn't the Home link becomes a <div> with the same classes
 // and content (so it looks the same but goes nowhere), and email actions on blocks are dropped.
+// Links marked data-keep-link (the office addresses) stay clickable.
 function homeLinksOnly(html) {
   const home = url('/index.html');
   return html
     .replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/g, (whole, attrsText, inner) => {
       const href = (attrsText.match(/\shref="([^"]*)"/) || [])[1];
-      if (href === home) return whole;
+      if (href === home || /\sdata-keep-link="/.test(attrsText)) return whole;
       const kept = attrsText.replace(/\s(href|target|rel|data-barba-prevent|data-todo|aria-current)="[^"]*"/g, '');
       return `<div${kept} data-link-off="">${inner}</div>`;
     })

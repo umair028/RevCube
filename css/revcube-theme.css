@@ -187,6 +187,9 @@
 /* Footer contact block */
 .revcube-contact { margin-bottom: 3rem; }
 .revcube-address { max-width: 22rem; margin: 0.25rem 0 0; }
+/* Addresses are Google Maps links: block-level like the old paragraph, white on hover */
+a.revcube-address { display: block; text-decoration: none; transition: color .3s; }
+a.revcube-address:hover { color: var(--ygn--white); }
 
 /* ---- Layout glue for content-driven pages (build.js). Reuses existing components; only spacing/arrangement here. ---- */
 .section-hero { background-color: var(--ygn--black); }

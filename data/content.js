@@ -25,6 +25,7 @@ const contact = {
     phone: '+92 334-221-1795',
     phoneHref: 'tel:+923342211795',
     address: 'Suite 111, Mezanine Floor, Anum Estate Building, Shahrah-e-Faisal, Karachi',
+    mapUrl: 'https://www.google.com/maps/search/?api=1&query=Anum+Estate+Building,+Shahrah-e-Faisal,+Karachi',
     city: 'Karachi, PK',
     timeZone: 'Asia/Karachi',
   },
@@ -239,6 +240,7 @@ const site = {
   titleSuffix: ' | The RevCube',
   // At the user's request (2026-10-21) every link except Home is switched off: other links render as
   // plain, non-clickable elements and the email actions are removed. Set to false to restore them all.
+  // Exception (2026-10-22): the two office addresses in the footer still open Google Maps.
   homeLinksOnly: true,
   contact,
   contactLink: CONTACT_LINK,
