@@ -239,8 +239,9 @@ const site = {
   url: 'https://www.therevcube.com',
   titleSuffix: ' | The RevCube',
   // At the user's request (2026-10-21) every link except Home is switched off: other links render as
-  // plain, non-clickable elements and the email actions are removed. Set to false to restore them all.
-  // Exception (2026-10-22): the two office addresses in the footer still open Google Maps.
+  // plain, non-clickable elements. Set to false to restore them all.
+  // Exceptions (2026-10-22): the two office addresses in the footer still open Google Maps, and every email
+  // link and button (Let's Talk, Let's Start a Project, Start a Project, the footer email and icon) opens an email.
   homeLinksOnly: true,
   contact,
   contactLink: CONTACT_LINK,

@@ -324,18 +324,17 @@ function footer(cta) {
 }
 
 // With site.homeLinksOnly: every <a> that isn't the Home link becomes a <div> with the same classes
-// and content (so it looks the same but goes nowhere), and email actions on blocks are dropped.
-// Links marked data-keep-link (the office addresses) stay clickable.
+// and content (so it looks the same but goes nowhere). Email links (mailto:, and blocks with data-mailto)
+// and links marked data-keep-link (the office addresses) stay clickable.
 function homeLinksOnly(html) {
   const home = url('/index.html');
   return html
     .replace(/<a\b([^>]*)>([\s\S]*?)<\/a>/g, (whole, attrsText, inner) => {
-      const href = (attrsText.match(/\shref="([^"]*)"/) || [])[1];
-      if (href === home || /\sdata-keep-link="/.test(attrsText)) return whole;
+      const href = (attrsText.match(/\shref="([^"]*)"/) || [])[1] || '';
+      if (href === home || href.startsWith('mailto:') || /\sdata-keep-link="/.test(attrsText)) return whole;
       const kept = attrsText.replace(/\s(href|target|rel|data-barba-prevent|data-todo|aria-current)="[^"]*"/g, '');
       return `<div${kept} data-link-off="">${inner}</div>`;
-    })
-    .replace(/ data-mailto="[^"]*"/g, '');
+    });
 }
 
 // ---------------------------------------------------------------------------

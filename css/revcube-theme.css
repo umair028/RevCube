@@ -182,7 +182,7 @@
 }
 
 /* Switched-off links (site.homeLinksOnly): keep their look but not a pointer cursor */
-[data-link-off], [book-modal-open-btn], .section.background-color-black[data-cursor-intro] { cursor: default; }
+[data-link-off] { cursor: default; }
 
 /* Footer contact block */
 .revcube-contact { margin-bottom: 3rem; }
