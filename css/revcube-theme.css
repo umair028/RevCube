@@ -22,6 +22,7 @@
 .loading-content { color: #ffffff; }
 
 /* Status dots. Selectors are one step more specific than the page's inline <style>, which loads later. */
+.footer .footer-bottom-block .dot { background-color: #ff4d4d; }
 .footer .footer-bottom-block.online .dot { background-color: #52fe8d; }
 .nav-wrap .dot-anime { animation-name: revcube-pulse; }
 @keyframes revcube-pulse {
@@ -260,7 +261,14 @@ a.revcube-address:hover { color: var(--ygn--white); }
 /* Footer status clocks, one per office */
 /* The copyright row and Back to top line up with the first clock (Columbus); the Karachi clock sits below it */
 .footer .footer-bottom { align-items: flex-start; }
-.footer .footer-bottom > .revcube-footer-meta, .footer .footer-bottom > .back-to-top { min-height: 2.375rem; display: flex; align-items: center; }
+.footer .footer-bottom > .back-to-top { min-height: 2.375rem; display: flex; align-items: center; }
+/* Copyright on the Columbus line, Privacy and Terms centred under it on the Karachi line */
+.footer .footer-bottom > .revcube-footer-meta { flex-direction: column; gap: 0.5rem; }
+.revcube-footer-meta > * { min-height: 2.375rem; display: flex; align-items: center; justify-content: center; }
+@media screen and (max-width: 767px) {
+  .footer .footer-bottom > .revcube-footer-meta { align-items: flex-start; }
+  .revcube-footer-meta > * { justify-content: flex-start; min-height: 0; }
+}
 .revcube-status-blocks { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 .revcube-footer-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem 1.5rem; }
 .revcube-legal { display: flex; gap: 1.5rem; }
