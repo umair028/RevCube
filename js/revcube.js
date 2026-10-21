@@ -1,5 +1,5 @@
 // The RevCube site behaviour: [data-mailto] blocks open email, the nav dot follows the current item,
-// and the footer clock runs on the office's time zone (data-tz on the clock block).
+// and each footer clock runs on its office's time zone (data-tz on the clock block).
 // Elements are looked up on every use because Barba page transitions swap the page content.
 (function () {
   // Opened straight from disk, browsers block Barba's history updates, so links do normal page loads.
@@ -67,12 +67,11 @@
 
   function tick() {
     var now = new Date();
-    var block = document.querySelector('[la-availability][data-tz]');
-    var TZ = (block && block.getAttribute('data-tz')) || DEFAULT_TZ;
-    var time = now.toLocaleTimeString('en-US', { timeZone: TZ, hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    document.querySelectorAll('[la-time]').forEach(function (c) { c.textContent = time; });
-    var hour = parseInt(now.toLocaleString('en-US', { timeZone: TZ, hour12: false, hour: '2-digit' }), 10) % 24;
     document.querySelectorAll('[la-availability]').forEach(function (s) {
+      var TZ = s.getAttribute('data-tz') || DEFAULT_TZ;
+      var time = now.toLocaleTimeString('en-US', { timeZone: TZ, hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      s.querySelectorAll('[la-time]').forEach(function (c) { c.textContent = time; });
+      var hour = parseInt(now.toLocaleString('en-US', { timeZone: TZ, hour12: false, hour: '2-digit' }), 10) % 24;
       s.classList.toggle('online', hour >= OPEN_HOUR && hour < CLOSE_HOUR);
     });
     // Also catches Barba page swaps, which don't fire a scroll event.

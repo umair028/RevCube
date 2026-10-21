@@ -22,7 +22,7 @@
 .loading-content { color: #ffffff; }
 
 /* Status dots. Selectors are one step more specific than the page's inline <style>, which loads later. */
-.footer .footer-bottom-block.online .dot { background-color: #ffffff; }
+.footer .footer-bottom-block.online .dot { background-color: #52fe8d; }
 .nav-wrap .dot-anime { animation-name: revcube-pulse; }
 @keyframes revcube-pulse {
   0% { box-shadow: 0 0 0 0 rgba(178, 178, 178, 0.5); }
@@ -229,11 +229,36 @@
   .revcube-steps-4 .text-style-display, .revcube-steps-5 .text-style-display, .revcube-steps-6 .text-style-display { font-size: 4rem; }
 }
 
-/* Footer: list columns start at the top; the services list gets two of the three columns */
+/* Footer: list columns start at the top; Quick Links, Contact and the second office share the width,
+   with the two contact columns wider so the email address fits on one line. On phones each contact column takes a full row. */
 .revcube-footer-links { align-items: start; }
+/* Less empty space under the footer clocks */
+.footer { padding-bottom: 2.5rem; }
 @media screen and (min-width: 768px) {
-  .revcube-footer-links > :nth-child(2) { grid-column: span 2; }
+  /* The main contact column is only as wide as its content, so the second office sits a short gap after it */
+  .revcube-footer-links { width: 100%; grid-template-columns: minmax(9rem, 12.5rem) auto 1fr; }
+  .revcube-footer-links > .revcube-contact + .revcube-contact { padding-left: 4.5rem; }
+  /* The longer second-office address gets a wider line so it fits on two lines */
+  .revcube-contact + .revcube-contact .revcube-address { max-width: 30rem; }
 }
+/* Desktop: every column is as wide as its content, and Social follows the second office with the same
+   gap as Quick Links -> Contact. */
+@media screen and (min-width: 992px) {
+  .footer .grid-layout._8-4.for-footer { grid-template-columns: auto auto; justify-content: start; column-gap: 6rem; }
+  .footer .revcube-footer-links { width: auto; grid-template-columns: minmax(9rem, 12.5rem) auto auto; }
+}
+@media screen and (max-width: 767px) {
+  .revcube-footer-links { row-gap: 2.5rem; margin-bottom: 3rem; }
+  .revcube-footer-links > .revcube-contact { grid-column: span 2; margin-bottom: 0; }
+  .revcube-footer-links > .revcube-contact + .revcube-contact { margin-top: -1.25rem; }
+  .revcube-row-spacer { display: none; }
+  .revcube-footer-links > .revcube-contact + .revcube-contact > .text-style-kicker { display: none; }
+}
+/* Footer status clocks, one per office */
+/* The copyright row and Back to top line up with the first clock (Columbus); the Karachi clock sits below it */
+.footer .footer-bottom { align-items: flex-start; }
+.footer .footer-bottom > .revcube-footer-meta, .footer .footer-bottom > .back-to-top { min-height: 2.375rem; display: flex; align-items: center; }
+.revcube-status-blocks { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
 .revcube-footer-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem 1.5rem; }
 .revcube-legal { display: flex; gap: 1.5rem; }
 .revcube-legal a, .revcube-legal [data-link-off] { color: var(--ygn--ash); text-decoration: none; transition: color .3s; }

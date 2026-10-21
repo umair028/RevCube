@@ -14,11 +14,20 @@ const contact = {
   phoneHref: 'tel:+18053877347',
   officeLabel: 'USA Office',
   address: '7965 N High St, Ste 350, #303, Columbus, OH 43235',
-  // Shown next to the footer clock; the clock runs on this office's time zone.
+  // Shown next to the footer clock; the clock runs on this office's time zone (work hours 9 AM - 6 PM, set in js/revcube.js).
   city: 'Columbus, OH',
   timeZone: 'America/New_York',
   website: 'www.therevcube.com',
   mapUrl: 'https://www.google.com/maps/search/?api=1&query=7965+N+High+St,+Ste+350,+Columbus,+OH+43235',
+  // Second office, shown in its own footer column next to the main contact details.
+  secondOffice: {
+    label: 'Pakistan Office',
+    phone: '+92 334-221-1795',
+    phoneHref: 'tel:+923342211795',
+    address: 'Suite 111, Mezanine Floor, Anum Estate Building, Shahrah-e-Faisal, Karachi',
+    city: 'Karachi, PK',
+    timeZone: 'Asia/Karachi',
+  },
 };
 
 const CONTACT_LINK = 'mailto:' + contact.email;
@@ -261,11 +270,12 @@ const site = {
       { label: 'Our Work', href: '/index.html#work' },
     ],
     // The footer Services column was removed at the user's request (2026-10-21); Contact took its place.
-    // LinkedIn and Behance removed at the user's request (2026-10-21).
+    // Behance removed at the user's request (2026-10-21); LinkedIn added back on 2026-10-22.
     socialLabel: 'Social',
     social: [
       { label: 'Facebook', href: '#', todo: 'facebook-url' },
       { label: 'Instagram', href: '#', todo: 'instagram-url' },
+      { label: 'LinkedIn', href: '#', todo: 'linkedin-url' },
     ],
     copyright: '© 2026 The RevCube. All Rights Reserved.',
     legal: [
@@ -301,7 +311,7 @@ const pages = [
       { type: 'logos', logos: logoSets.tools },
       // The kicker + badge block links to the About Us page, which doesn't exist yet (about-us.html).
       { type: 'intro', id: 'about', kicker: 'About The RevCube', link: { href: '/about-us.html', label: 'About Us', todo: 'about-page' },
-        badge: { title: 'Full-Service Creative Tech Studio', subtitle: 'Based in Columbus, OH' },
+        badge: { title: 'Full-Service Creative Tech Studio', subtitle: 'Based in Columbus, OH & Karachi, Pakistan' },
         statement: 'The RevCube is a **creative tech studio** helping brands look professional and sell more. From the logo to the website to the ads that bring customers in, we are **one studio** for every service your brand needs, built for a premium look and **measurable results.**' },
       // PLACEHOLDER - replace before publishing: this is Yugen's showreel (it shows their client work).
       // Put The RevCube's own videos in videos/ and set the file names here.
@@ -333,7 +343,6 @@ const pages = [
         { title: 'Creative Excellence', image: 'images/why-creative-excellence.jpg', description: 'Work that captures attention and builds connection.' },
         { title: 'Results-Driven', image: 'images/why-results-driven.jpg', description: 'We measure success by traffic, leads and sales — not just looks.' },
         { title: 'On-Time Delivery', image: 'images/why-on-time-delivery.jpg', description: 'We respect deadlines and deliver top-quality work on time.' },
-        { title: 'Revisions Included', image: 'images/why-revisions-included.jpg', description: 'We refine until you’re completely happy with the result.' },
       ] },
       // Background video: free stock clip from Pexels (pexels.com/video/7659850), added 2026-10-21.
       { type: 'testimonials', eyebrow: 'What Our Clients Say', headline: 'Trusted by Businesses, Loved by Clients', items: testimonials.home, stats: stats.home, video: 'videos/testimonial-team-meeting.mp4' },
@@ -600,7 +609,6 @@ const pages = [
         { title: 'Cinematic Quality', description: 'High production value that reflects your brand’s professionalism.' },
         { title: 'Strategic Approach', description: 'Every video is crafted with your goals and audience in mind.' },
         { title: 'On-Time Delivery', description: 'We respect deadlines and deliver top-quality work on time.' },
-        { title: 'Revisions Included', description: 'We refine until you absolutely love the result.' },
         { title: 'Results-Driven', description: 'Videos designed to engage, convert and drive growth.' },
       ] },
       { type: 'testimonials', eyebrow: 'Clients Love Our Work', items: testimonials['video-production'] },
