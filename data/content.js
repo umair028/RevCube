@@ -12,9 +12,13 @@ const contact = {
   email: 'connect@therevcube.com',
   phone: '+1 805-387-7347',
   phoneHref: 'tel:+18053877347',
-  address: '616 St Paul Ave Unit 317, Los Angeles, CA 90017, United States',
+  officeLabel: 'USA Office',
+  address: '7965 N High St, Ste 350, #303, Columbus, OH 43235',
+  // Shown next to the footer clock; the clock runs on this office's time zone.
+  city: 'Columbus, OH',
+  timeZone: 'America/New_York',
   website: 'www.therevcube.com',
-  mapUrl: 'https://www.google.com/maps/search/?api=1&query=616+St+Paul+Ave+Unit+317,+Los+Angeles,+CA+90017',
+  mapUrl: 'https://www.google.com/maps/search/?api=1&query=7965+N+High+St,+Ste+350,+Columbus,+OH+43235',
 };
 
 const CONTACT_LINK = 'mailto:' + contact.email;
@@ -297,7 +301,7 @@ const pages = [
       { type: 'logos', logos: logoSets.tools },
       // The kicker + badge block links to the About Us page, which doesn't exist yet (about-us.html).
       { type: 'intro', id: 'about', kicker: 'About The RevCube', link: { href: '/about-us.html', label: 'About Us', todo: 'about-page' },
-        badge: { title: 'Full-Service Creative Tech Studio', subtitle: 'Based in Los Angeles, CA' },
+        badge: { title: 'Full-Service Creative Tech Studio', subtitle: 'Based in Columbus, OH' },
         statement: 'The RevCube is a **creative tech studio** helping brands look professional and sell more. From the logo to the website to the ads that bring customers in, we are **one studio** for every service your brand needs, built for a premium look and **measurable results.**' },
       // PLACEHOLDER - replace before publishing: this is Yugen's showreel (it shows their client work).
       // Put The RevCube's own videos in videos/ and set the file names here.
